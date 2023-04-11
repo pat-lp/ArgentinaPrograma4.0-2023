@@ -1,0 +1,210 @@
+Ejercicio 1: Las ganancias semestrales
+function gananciaSemestre(balances) {
+  return balances[0].ganancia + balances[1].ganancia +
+         balances[2].ganancia + balances[3].ganancia +
+         balances[4].ganancia + balances[5].ganancia;
+}
+¿Tiene algún problema la función gananciaSemestre que escribimos anteriormente?
+
+Resolución: 
+gananciaSemestre 
+
+Ejercicio 2: ¿Y el resto de las ganancias?
+Lo que nos gustaría es poder sumar las ganancias de todos los balances de una lista, sin importar cuántos haya realmente; 
+queremos una función gananciaTotal, que pueda sumar balances de cualquier período de meses: semestres, cuatrimestres, trimestres, etc. 
+¡Qué difícil!
+
+Resolución: 
+¡Relajá! Ya tenemos nuestra versión; probala con las siguientes consultas:
+
+> gananciaTotal([
+      { mes: "enero", ganancia: 2 }, 
+      { mes: "febrero", ganancia: 3 }
+  ])
+> gananciaTotal([
+      { mes: "enero", ganancia: 2 }, 
+      { mes: "febrero", ganancia: 3 }, 
+      { mes: "marzo", ganancia: 1 }, 
+      { mes: "abril", ganancia: 8 }, 
+      { mes: "mayo", ganancia: 8 }, 
+      { mes: "junio", ganancia: -1 }
+  ])
+> gananciaTotal([])
+
+Ejercicio 3: Todas las ganancias, la ganancia
+Tratá de escribir gananciaTotal4 que funcione para 4 elementos.
+
+Resolución: 
+function gananciaTotal4(balancesDeUnPeriodo) {
+  let sumatoria = 0;
+  sumatoria = sumatoria + balancesDeUnPeriodo[0].ganancia;
+  sumatoria = sumatoria + balancesDeUnPeriodo[1].ganancia;
+  sumatoria = sumatoria + balancesDeUnPeriodo[2].ganancia;
+  sumatoria = sumatoria + balancesDeUnPeriodo[3].ganancia;
+  return sumatoria;
+}
+
+Ejercicio 4: Nos visita un viejo amigo
+function gananciaTotal(balancesDeUnPeriodo) {
+  let sumatoria = 0;
+  for (let balance of balancesDeUnPeriodo) {
+    sumatoria = sumatoria + balance.ganancia;
+  }
+  return sumatoria;
+}
+Probá las siguientes expresiones en la consola:
+
+Resolución: 
+> gananciaTotal([])
+> gananciaTotal([
+    { mes: "noviembre", ganancia: 5 }
+   ])
+> gananciaTotal([
+    { mes: "marzo", ganancia: 8 }, 
+    { mes: "agosto", ganancia: 10 }
+   ])
+> gananciaTotal([
+    { mes: "enero", ganancia: 2 }, 
+    { mes: "febrero", ganancia: 10 }, 
+    { mes: "marzo", ganancia: -20 }
+   ])
+> gananciaTotal([
+    { mes: "enero", ganancia: 2 }, 
+    { mes: "febrero", ganancia: 10 }, 
+    { mes: "marzo", ganancia: -20 }, 
+    { mes: "abril", ganancia: 0 }, 
+    { mes: "mayo", ganancia: 10 }
+   ])
+   
+Ejercicio 5: Cuentas claras
+Completá la función cantidadDeBalancesPositivos. 
+Si prestás atención, notarás que tiene una estructura similar al problema anterior.
+
+Resolución: 
+function cantidadDeBalancesPositivos(balancePeriodo) {
+  let cantidadPositivos = 0;
+  for (let balance of balancePeriodo) {
+    cantidadPositivos = cantidadPositivos + (1* balance.ganancia > 0 )
+  }
+  return cantidadPositivos;
+}
+
+Ejercicio 6: La ganancia promedio
+Dado un conjunto cualquiera de balances cuál es su gananciaPromedio.
+
+Resolución: 
+function gananciaPromedio(gananciaTotal) {
+  let sumatoria = 0;
+  for (let balance of gananciaTotal) {
+    sumatoria = (sumatoria + balance.ganancia)
+  }
+  return sumatoria/longitud (gananciaTotal)
+}
+
+Ejercicio 7: Quién gana, quién pierde
+Definí las funciones:
+gananciaPositiva, que es la suma de las ganancias de los balances positivos
+promedioGananciasPositivas invocando gananciaPositiva y cantidadDeBalancesPositivos.
+
+Resolución: 
+function gananciaPositiva(balancePeriodo){
+  let sumatoria = 0
+  for (let balance of balancePeriodo){
+    if (balance.ganancia > 0){
+      sumatoria = sumatoria + (balance.ganancia)
+    }
+  } 
+  return sumatoria;
+}
+
+function promedioGananciasPositivas(balancePeriodo){
+  return gananciaPositiva(balancePeriodo)/cantidadDeBalancesPositivos(balancePeriodo) 
+}
+
+Ejercicio 8: Soy el mapa, soy el mapa
+Completá la función ganancias que toma una lista de balances y devuelve una lista que solo posea solo las ganancias de cada uno.
+
+Resolución:
+function ganancias(balancePeriodo) {
+  let ganancias = [];
+  for (let balance of balancePeriodo) {
+    agregar(ganancias, balance.ganancia);
+  }
+  return ganancias;
+}
+
+
+Ejercicio 9: A filtrar, a filtrar cada cosa en su lugar
+Completá la función balancesPositivos que toma los balances de un período y devuelve una lista con aquellos cuya ganancia fue mayor a cero.
+
+Resolución: 
+function balancesPositivos(balancePeriodo) {
+  let balances = [];
+  for (let balance of balancePeriodo) {
+    if (balance.ganancia > 0) {
+      agregar (balances, balance);
+    }
+  }
+  return balances;
+}
+
+
+Ejercicio 10: Un promedio más positivo
+Definí la función gananciasDeBalancesPositivos y luego usala junto a promedio para definir promedioDeBalancesPositivos.
+
+Resolución: 
+function gananciasDeBalancesPositivos(balancePeriodo){
+  return ganancias(balancesPositivos(balancePeriodo))
+}
+
+function promedioDeBalancesPositivos(balancePeriodo){
+  return promedio(gananciasDeBalancesPositivos(balancePeriodo))
+}
+
+Ejercicio 11: Esto es lo máximo
+definí la función maximaGanancia que nos diga cuál es la ganancia más alta entre los balances de un período de tiempo.
+
+Resolución: 
+function maximaGanancia(balancePeriodo){
+  return maximo(ganancias(balancePeriodo));
+}
+
+Ejercicio 12: Como mínimo
+Definí la función minimaGananciaPositiva que nos diga cuál es la ganancia más baja de todos los balances positivos.
+
+Resolución: 
+function minimaGananciaPositiva (balancePeriodo) {
+return minimo(gananciasDeBalancesPositivos(balancePeriodo));
+}
+
+Ejercicio 13: Los mejores meses del año
+Vamos a hacer las siguientes funciones:
+meses, la cual dada una lista con registros devuelve una lista de meses ;
+afortunados, que filtra aquellos registros que tuvieron una ganancia mayor a $1000 ;
+mesesAfortunados, devuelve aquellos meses que fueron afortunados.
+
+Definí las funciones meses, afortunados, mesesAfortunados.
+
+Resolución: 
+function meses(gananciaPeriodo){
+  let mes = [];
+  for (let periodo of gananciaPeriodo){
+    agregar (mes, periodo.mes);
+  }
+  return mes;
+}
+
+function afortunados(gananciaPeriodo){
+  let afortunados = [];
+  for (let periodo of gananciaPeriodo){
+    if (periodo.ganancia >1000){
+    agregar(afortunados, periodo);
+    }
+  }
+  return afortunados;
+}
+
+function mesesAfortunados(gananciaPeriodo){
+  let mesesAfortunados = [];
+  return meses(afortunados(gananciaPeriodo))
+}
