@@ -1,0 +1,116 @@
+Ejercicio 1: Series favoritas
+let seriesFavoritasDeAna = ["Game of Thrones", "Breaking Bad", "House of Cards"];
+let seriesFavoritasDeHector = ["En Terapia", "Recordando el Show de Alejandro Molina"]
+Probá en la consola las siguientes consultas
+
+Resolución: 
+seriesFavoritasDeAna
+seriesFavoritasDeHector
+["hola","mundo!"]
+["hola","hola"]
+
+Ejercicio 2: Y esto, es una lista
+Probá en la consola las siguientes consultas:
+
+Resolución: 
+Probá en la consola las siguientes consultas:
+listasIguales(["hola", "mundo"], ["mundo", "hola"])
+listasIguales(["hola", "mundo"], ["hola", "mundo"])
+listasIguales(["hola", "mundo"], ["hola", "todo", "el", "mundo"])
+listasIguales(["hola"], ["hola", "mundo"])
+["hola", "mundo"] === ["mundo", "hola"]
+personas
+["mara", "julian"] === personas
+personas === personas
+
+Ejercicio 3: Juegos de azar
+let numerosDeLoteria = [2, 11, 17, 32, 36, 39];
+let tiradasDelDado = [1, 6, 6, 2, 2, 4];
+let salioCara = [false, false, true, false];
+Probá en la consola las siguientes consultas:
+
+Resolución: 
+numerosDeLoteria
+salioCara
+[[1, 2, 3], [4, 5, 6]]
+
+Ejercicio 4: Listas vacías
+let unaListaVacia = []
+Probá escribir en la consola unaListaVacia
+
+Resolución: 
+=> []
+
+Ejercicio 5: ¿Cuántos elementos tenés?
+Realizá las siguientes consultas en la consola:
+
+Resolución: 
+longitud([])
+longitud(numerosDeLoteria)
+longitud([4, 3])
+
+Ejercicio 6: Agregando sabor
+let pertenencias = ["espada", "escudo", "antorcha"];
+Inspeccioná en la consola qué elementos contiene pertenencias, agregale una "ballesta" y volvé a inspeccionar pertenencias.
+Además existe un procedimiento remover, que recibe la lista y un elemento por parámetro. Investigá en la consola qué hace. 
+
+Resolución: 
+pertenencias
+agregar(pertenencias,"ballesta")
+remover('ballesta')
+
+Ejercicio 7: Trasladar
+Definí el procedimiento trasladar, que tome dos listas y un elemento de la primera. trasladar debe sacar el elemento de la primera lista y agregarlo en la segunda.
+
+Resolución: 
+function trasladar(l1,l2,n){
+  remover(l1,n);
+  agregar(l2,n);
+}
+
+Ejercicio 8: ¿Y dónde está?
+posicion(["a", "la", "grande", "le", "puse", "cuca"], "grande"); //devuelve 2
+let diasLaborales = ["lunes", "martes", "miercoles", "jueves", "viernes"]
+Probá lo siguiente:
+
+Resolución: 
+posicion(diasLaborales, "osvaldo")
+=> -1
+
+Ejercicio 9: Contiene
+Definí la función contiene que nos diga si una lista contiene un cierto elemento.
+
+Resolución: 
+function contiene(lista, elemento){
+  return posicion(lista, elemento) !== -1;
+}
+
+Ejercicio 10: Enésimo elemento
+Probalo en la consola: ¿qué sucede si le pedís el elemento 0 a una lista vacía? ¿O si le pedís el elemento 48 a una lista de 2 elementos?
+
+Resolución: 
+mesesDelAnio[48]
+=> undefined
+
+Ejercicio 11: Más premios
+Definí nuevamente la función medallaSegunPuesto, pero esta vez usando como máximo un único if.
+
+Resolución: 
+let medalla = ["oro", "plata", "bronce"];
+function medallaSegunPuesto(puesto) {
+if (puesto <= 3)
+  return medalla[puesto-1]
+else
+  return "nada";
+}
+
+Ejercicio 12: No te olvides de saludar
+Completá la función saludar que recibe una lista de personas e imprime un saludo con "hola" para cada una de ellas.
+
+Resolución: 
+function saludar(listaPersonas) {
+  for(let persona of listaPersonas) {
+    imprimir("hola"+' '+persona)
+  }
+}
+}
