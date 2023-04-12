@@ -1,0 +1,438 @@
+Ejercicio 1: ¿Pepita está feliz?
+Completá los métodos debil? y feliz? de Pepita.
+
+Resolución: 
+module Pepita
+  @energia = 1000
+
+  def self.energia
+    @energia 
+  end
+
+  def self.volar_en_circulos!
+    @energia -= 10
+  end
+  
+  def self.comer_alpiste!(gramos)
+    @energia += gramos * 15
+  end  
+
+  def self.debil?
+    @energia <100
+  end
+  
+  def self.feliz?
+     @energia >1000
+  end
+end
+
+Ejercicio 2: Reencuentro alternativo
+Hacé que Pepita entienda el mensaje hacer_lo_que_quiera! que se comporte como explicamos.
+
+Resolcuión:
+module Pepita
+  @energia = 1000
+
+  def self.energia
+    @energia 
+  end
+
+  def self.volar_en_circulos!
+    @energia -= 10
+  end
+  
+  def self.comer_alpiste!(gramos)
+    @energia += gramos * 15
+  end  
+
+  def self.debil?
+    @energia <100
+  end
+  
+  def self.feliz?
+     @energia >1000
+  end
+  
+  def self.hacer_lo_que_quiera!
+    if self.debil?
+      self.comer_alpiste!(10)
+    end
+  end
+end
+
+
+Ejercicio 3: Repitamos qué pasa si no
+Modificá la solución para que si Pepita no está débil vuele en círculos 3 veces.
+
+Resolución: 
+module Pepita
+  @energia = 1000
+
+  def self.energia
+    @energia 
+  end
+
+  def self.volar_en_circulos!
+    @energia -= 10
+  end
+  
+  def self.comer_alpiste!(gramos)
+    @energia += gramos * 15
+  end  
+
+  def self.debil?
+    @energia <100
+  end
+  
+  def self.feliz?
+     @energia >1000
+  end
+  
+  def self.hacer_lo_que_quiera!
+    if self.debil?
+      self.comer_alpiste!(10)
+    else
+      3.times{self.volar_en_circulos!}
+    end
+  end
+end
+
+
+Ejercicio 4: Voy a hacer, pero como yo quiero
+Ahora que vimos estas condiciones anidadas que poco tienen que ver con el nido de Pepita , 
+vamos a conocer el comportamiento definitivo de Pepita cuando hace lo que quiere:
+Si está débil, come diez gramos de alpiste, para recuperarse.
+Si no está debil pero sí feliz, vuela en círculos cinco veces.
+Si no está feliz ni débil, vuela en círculos 3 veces.
+Modificá a Pepita para que el método hacer_lo_que_quiera! se comporte como mencionamos más arriba.
+
+Resolución: 
+module Pepita
+  @energia = 1000
+
+  def self.energia
+    @energia 
+  end
+
+  def self.volar_en_circulos!
+    @energia -= 10
+  end
+  
+  def self.comer_alpiste!(gramos)
+    @energia += gramos * 15
+  end  
+
+  def self.debil?
+    @energia <100
+  end
+  
+  def self.feliz?
+     @energia >1000
+  end
+  
+  def self.hacer_lo_que_quiera!
+    if self.debil?
+      self.comer_alpiste!(10)
+    elsif self.feliz?
+      5.times{self.volar_en_circulos!}
+      else
+      3.times{self.volar_en_circulos!}
+    end
+  end
+end
+
+Ejercicio 5: Llegó Pepo
+Pepo es un gorrión que también sabe comer, volar y hacer lo que quiera, pero lo hace de manera diferente a Pepita.
+comer alpiste: el aparato digestivo de Pepo no anda muy bien, por eso solo puede aprovechar la mitad del alpiste que come. 
+Por ejemplo, si come 20 gramos de alpiste, su energía solo aumenta en 10.
+volar en círculos: gasta 15 unidades de energía si está pesado y 5 si no lo está. Decimos que está pesado si su energía es mayor a 1100.
+hacer lo que quiera: como siempre tiene hambre, aprovecha y come 120 gramos de alpiste.
+Ah, y al igual que Pepita, su energía comienza en 1000.
+Definí a Pepo según las reglas anteriores. Te dejamos el código de Pepita para usar como base, modificá y borrá las partes que no correspondan.
+
+Resolución: 
+module Pepo
+  @energia = 1000
+
+  def self.energia
+    @energia 
+  end
+
+  def self.volar_en_circulos!
+    if self.pesado?
+      @energia -= 15
+    else
+      @energia -= 5
+  end
+  end
+
+  def self.comer_alpiste!(gramos)
+    @energia += gramos/2
+  end  
+
+  def self.pesado?
+  self.energia > 1100
+  end
+    
+  def self.hacer_lo_que_quiera!
+    self.comer_alpiste!(120)
+  end
+end
+
+Ejercicio 6: ¡A entrenar!
+Para ayudarnos en esta tarea conseguimos a Pachorra, un ex entrenador de fútbol que ahora se dedica a trabajar con aves. 
+Él diseñó una rutina especial que consiste en lo siguiente:
+Volar en círculos 10 veces.
+Comer un puñado de 30 gramos de alpiste.
+Volar en círculos 5 veces.
+Como premio, que el ave haga lo que quiera.
+Creá a Pachorra, el entrenador de aves, y hacé que cuando reciba el mensaje entrenar_ave! haga que Pepita realice su rutina 
+(si, solo puede entrar a Pepita , pero lo solucionaremos pronto).
+
+Resolución: 
+module Pachorra
+  def self.entrenar_ave!
+  10.times{Pepita.volar_en_circulos!}
+  Pepita.comer_alpiste!(30)
+  5.times{Pepita.volar_en_circulos!}
+  Pepita.hacer_lo_que_quiera!
+  end
+end
+
+Ejercicio 7: Pachorra todoterreno
+Agregale a Pachorra el método firmar_contrato!(ave), de forma tal que cuando le enviemos el 
+mensaje entrenar_ave! haga entrenar al último ave con el que haya firmado contrato.
+
+Resolución:
+module Pachorra
+  def self.firmar_contrato!(ave)
+    @ave = ave
+  end
+  
+  def self.entrenar_ave!
+  10.times{@ave.volar_en_circulos!}
+  @ave.comer_alpiste!(30)
+  5.times{@ave.volar_en_circulos!}
+  @ave.hacer_lo_que_quiera!
+  end
+end
+
+Ejercicio 8: Una golondrina diferente
+¿Te acordás de Norita, la amiga de Pepita? Resulta que ella también quiere empezar a entrenar, y su código es el siguiente:
+
+module Norita
+  @energia = 500
+
+  def self.volar_en_circulos!
+    @energia -= 30
+  end
+
+  def self.comer_alpiste!(gramos)
+    @energia -= gramos
+  end  
+end
+Pero, ¿podrá entrenar con Pachorra?
+
+Probalo en la consola, enviando los siguientes mensajes:
+
+Resolución: 
+> Pachorra.firmar_contrato! Norita
+> Pachorra.entrenar_ave!
+
+Ejercicio 9: Un entrenamiento más duro
+Miremos ahora el método entrenar_ave! de Emilce, una entrenadora un poco más estricta:
+
+module Emilce
+  def self.entrenar_ave!
+    53.times { @ave.volar_en_circulos! }
+    @ave.comer_alpiste! 8
+  end
+end
+¿Podrá Norita entrenar con Emilce? ¿Y Pepita? ¿Y Pepo?
+
+Resolución: 
+nnorita_puede_entrenar_con_pachorra = false
+norita_puede_entrenar_con_emilce = true 
+pepita_puede_entrenar_con_pachorra =  true 
+pepita_puede_entrenar_con_emilce =  true 
+pepo_puede_entrenar_con_pachorra =  true 
+pepo_puede_entrenar_con_emilce =  true 
+
+Ejercicio 10: ¿¿Polimor-qué??
+En nuestro caso:
+
+Pepita, Norita y Pepo son polimórficas para Emilce.
+Pepita, Norita y Pepo no son polimórficas para Pachorra.
+Pepita y Pepo son polimórficas para Pachorra.
+
+
+Ejercicio 11: Forzando el polimorfismo
+Modificá a Norita para que pueda entrenar con Pachorra.
+
+Resolución: 
+module Norita
+  @energia = 500
+
+  def self.energia
+    @energia
+  end
+
+  def self.volar_en_circulos!
+    @energia -= 30
+  end
+  
+  def self.comer_alpiste!(gramos)
+    @energia -= gramos
+  end
+  
+   def self.hacer_lo_que_quiera!
+  end  
+end
+
+Ejercicio 12: Empieza el set
+module Emilce
+  def self.ave=(ave_nueva)
+    @ave = ave_nueva
+  end
+
+  def self.entrenar_ave!
+    53.times { @ave.volar_en_circulos! }
+    @ave.comer_alpiste!(8)
+  end
+end
+¿Te animás a cambiar el código de Pachorra para que siga esta convención?
+
+Resolución:
+module Pachorra
+   def self.ave=(ave_nueva)
+    @ave = ave_nueva
+  end
+  
+  def self.entrenar_ave!
+    10.times { @ave.volar_en_circulos! }
+    @ave.comer_alpiste! 30
+    5.times { @ave.volar_en_circulos! }
+    @ave.hacer_lo_que_quiera!
+  end
+end
+
+Ejercicio 13: El encapsulamiento
+Te dejamos en la Biblioteca el código que modela a Manuelita, una tortuga viajera. 
+Algunos de sus atributos pueden ser leidos, otros modificados y otros ambas cosas.
+Completá las listas de atributos_con_getter y atributos_con_setter mirando en la definicion 
+de Manuelita qué tiene programado como setter y que como getter.
+
+Resolución: 
+atributos = %w(
+  energia
+  ciudad
+  mineral_preferido
+  donde_va
+)
+
+atributos_con_getter = %w(
+  energia
+  ciudad
+  mineral_preferido
+)
+
+atributos_con_setter = %w(
+   mineral_preferido
+  donde_va
+)
+
+Ejercicio 14: Vamos terminando
+Tu tarea será completar el código que te ofrecemos, definiendo los métodos incompletos y 
+agregando los getters y setters necesarios para que sea posible:
+Consultar cuánta cafeína en sangre tiene Inodoro.
+Consultar al compinche de Inodoro.
+Modificar al compinche de Inodoro.
+Consultar si Eulogia está enojada.
+Consultar cuántas ganas de hablar tiene Mendieta.
+Modificar las ganas de hablar de Mendieta.
+
+Resolución: 
+module Inodoro
+  @cafeina_en_sangre = 90
+  @compinche
+  
+  def self.cafeina_en_sangre
+  @cafeina_en_sangre
+  end
+
+  def self.compinche
+  @compinche
+  end
+
+  def self.compinche=(un_compinche)
+  @compinche= un_compinche
+  end
+end  
+module Eulogia
+  @enojada = false
+ 
+  def self.enojada?
+  @enojada
+  end
+end
+
+module Mendieta
+  @ganas_de_hablar = 5
+  
+  def self.ganas_de_hablar
+  @ganas_de_hablar
+  end
+  
+  def self.ganas_de_hablar=(ganas)
+  @ganas_de_hablar = ganas
+  end
+end
+
+Ejercicio 15: ¡Se va la que falta!
+Para finalizar el repaso vamos a modelar el comportamiento necesario para que Inodoro pueda tomar mate 
+con cualquiera de sus compinches... ¡Polimórficamente!
+Cuando Inodoro toma mate aumenta en 10 su cafeína en sangre y su compinche recibe un mate.
+Al recibir un mate, Eulogia se enoja porque Inodoro siempre le da mates fríos.
+Por su parte, Mendieta se descompone cuando recibe un mate, porque bueno... es un perro. 
+Esto provoca que no tenga nada de ganas de hablar (o en otras palabras, que sus ganas_de_hablar se vuelvan 0).
+Definí los métodos tomar_mate!, en Inodoro, y recibir_mate! en Eulogia y Mendieta.
+Definí los métodos tomar_mate!, en Inodoro, y recibir_mate! en Eulogia y Mendieta.
+
+Resolución: 
+module Inodoro
+  @cafeina_en_sangre = 90
+  @compinche
+  
+  def self.tomar_mate!
+    @cafeina_en_sangre += 10
+    @compinche.recibir_mate!
+  end
+  
+  def self.cafeina_en_sangre
+    @cafeina_en_sangre
+  end
+  
+  def self.compinche=(un_compinche)
+    @compinche= (un_compinche)
+  end
+end
+
+module Eulogia
+  @enojada = false
+  def self.recibir_mate!
+    @enojada= true
+  end
+  def self.enojada?
+    @enojada
+  end
+end
+
+module Mendieta
+  @ganas_de_hablar = 5
+  def self.recibir_mate!
+    @ganas_de_hablar=0
+  end
+  def self.ganas_de_hablar
+    @ganas_de_hablar
+  end
+end
