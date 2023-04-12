@@ -1,0 +1,179 @@
+Ejercicio 1: Fijando nuestro objetivo
+Resolución:
+Continuar
+
+Ejercicio 2: ¡Hola Pepita!
+¿No nos creés que Pepita está viva y es un objeto? Escribí en la consola Pepita y fijate qué sucede. 
+Cuando te convenzas, pasá al siguiente ejercicio.
+Resolución: 
+Pepita
+=> Pepita
+
+Ejercicio 3: Un mundo de objetos
+¡Probalo! Hacé las siguientes consultas en la consola:
+
+Resolución:
+> Pepita
+> Norita
+> 87
+> 'hola mundo'
+> true
+ 
+Ejercicio 4: El derecho a la Identidad
+Ejecutá las siguientes pruebas en la consola:
+
+Resolución:
+> Pepita == Norita
+> Norita == Pepita
+> Norita == Norita
+> "hola" == "chau"
+ 
+Ejercicio 5: Mensajes, primera parte
+Averigualo: enviale un mensaje cantar! y fijate qué pasa...
+
+Resolución:
+> Pepita.cantar!
+
+Ejercicio 6: Mensajes, segunda parte
+¡Descubrámoslo! Enviale el mensaje bailar!
+
+Resolución:
+> Pepita.bailar!
+
+Ejercicio 7: No entendí...
+Descubramos qué otras cosas sabe hacer Pepita. 
+Probá enviarle los siguientes mensajes y fijate cuáles entiende y cuales no ¡y anotalos! 
+Este conocimiento nos servirá en breve.
+
+Resolución: 
+> Pepita.pasear!
+> Pepita.energia
+> Pepita.comer_lombriz!
+> Pepita.volar_en_circulos!
+> Pepita.se_la_banca?
+ 
+Ejercicio 8: Un poco de sintaxis
+Es importante respetar la sintaxis del envío de mensajes. 
+Por ejemplo, las siguientes NO son colaboraciones validas, porque no funcionan o no hacen lo que deben:
+
+Resolución:
+> energia
+> Pepita energia
+> Pepita..energia
+
+Ejercicio 9: Interfaz
+¡Un momento! ¿Por qué algunos mensajes terminan en ! y otros no? Enviá nuevamente esos mensajes. 
+Fijate qué devuelve cada uno (lo que está a la derecha del =>) y tratá de descubrir el patrón.
+
+Resolución: 
+energia
+cantar!
+comer_lombriz!
+volar_en_circulos!
+
+Ejercicio 10: Hacer versus Devolver
+¿Y qué hay de los mensajes como comer_lombriz! y volar_en_circulos!? ¿Hicieron algo? ¿Qué clase de efecto produjeron?
+¿Devuelve energia siempre lo mismo?
+Descubrilo: enviale a Pepita esos tres mensajes varias veces en distinto orden y fijate si cambia algo.
+
+Resolución: 
+> Pepita.cantar!
+=> "pri pri pri"
+> Pepita.comer_lombriz!
+=> nil
+> Pepita.energia
+=> 120
+
+Ejercicio 11: Tu primer programa con objetos
+escribí un primer programa que consista en hacer que Pepita coma y vuele hasta quedarse con 150 unidades de energía.
+Acordate que Pepita arranca con la energía en 100.
+
+Resolución:
+Pepita.comer_lombriz!
+Pepita.comer_lombriz!
+Pepita.comer_lombriz!
+Pepita.volar_en_circulos!
+
+
+Ejercicio 12: ¿Quién te entiende?
+Pepita ya la conocemos bien: canta, come, etc. Su amiga Norita, por otro lado, no aprendió nunca a decirnos su energía. 
+Y Mercedes es una reconocida cantora.
+Usando la consola, averiguá cuál es la interfaz de cada una de ellas, y completá el listado de mensajes que cada una entiende en el editor.
+
+Resolución: 
+interfaz_pepita = %w(
+  energia
+  cantar!
+  comer_lombriz!
+  volar_en_circulos!
+)
+  
+interfaz_norita = %w(
+  cantar!
+  comer_lombriz!
+  volar_en_circulos!
+)
+  
+interfaz_mercedes = %w(
+  cantar!
+)
+Ejercicio 13: Interfaces compartidas
+Completá el código en el editor.
+
+# ¿Qué interfaz comparten Mercedes y Norita?
+interfaz_compartida_entre_mercedes_y_norita = %w(
+  cantar!
+)
+
+# ¿Qué interfaz comparten Pepita y Norita?
+interfaz_compartida_entre_pepita_y_norita = %w(
+  cantar!
+  comer_lombriz!
+  volar_en_circulos!
+)
+
+# ¿Qué interfaz comparten Mercedes, Norita y Pepita?
+interfaz_compartida_entre_todas = %w(
+ cantar!
+)
+
+
+Ejercicio 14: Argumentos
+Veamos si va quedando claro: escribí un programa que haga que Pepita coma 500 gramos de alpiste, vuele a Iruya, y finalmente vuelva a Obera.
+Probá enviar los siguientes mensajes:
+
+Resolución:
+> Pepita.volar_hacia! Iruya
+> Pepita.comer_alpiste! 39
+> Pepita.comer_alpiste! 6, Norita
+
+Ejercicio 15: Más argumentos
+Veamos si va quedando claro: escribí un programa que haga que Pepita coma 500 gramos de 
+alpiste, vuele a Iruya, y finalmente vuelva a Obera.
+
+Resolución: 
+Pepita.comer_alpiste! 500
+Pepita.volar_hacia! Iruya
+Pepita.volar_hacia! Obera
+
+Ejercicio 16: Mensajes por todas partes
+Probá en la consola los siguientes envíos de mensajes:
+
+Resolución: 
+> 5.+ 6
+> 3.< 27
+> Pepita.== Norita
+
+Ejercicio 17: Recapitulando
+Vamos a enviar algunos mensajes para terminar de cerrar la idea. 
+Te toca escribir un programa que haga que Pepita:
+Coma 90 gramos de alpiste.
+Vuele a Iruya.
+Finalmente, coma tanto alpiste como el 10% de la energía que le haya quedado.
+Este programa tiene que andar sin importar con cuanta energía arranque Pepita.
+
+
+Resolución: 
+Pepita.comer_alpiste! 90
+Pepita.volar_hacia! Iruya
+Pepita.comer_alpiste!(Pepita.energia * 0.1)
