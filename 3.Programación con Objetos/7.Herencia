@@ -218,7 +218,8 @@ class Colectivo < MedioDeTransporte
 
 
 Ejercicio 10: Es un trabajo para super
-Redefiní el método cargar_combustible! en Colectivo, de modo que haga lo mismo que cualquier MedioDeTransporte y además se quede sin pasajeros. Recordá utilizar super para evitar repetir lógica.
+Redefiní el método cargar_combustible! en Colectivo, de modo que haga lo mismo que cualquier MedioDeTransporte y además se 
+quede sin pasajeros. Recordá utilizar super para evitar repetir lógica.
 
 Resolución: 
 class Colectivo < MedioDeTransporte
