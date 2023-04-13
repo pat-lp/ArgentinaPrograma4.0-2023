@@ -1,1 +1,438 @@
+Ejercicio 1: Zombi caminante
+Manos a la obra: creá el objeto Bouba, que debe entender los mensajes sabe_correr?, gritar, salud y recibir_danio!.
+¡Cuidado! La salud de Bouba no puede ser menor que cero.
 
+Resolución:
+module Bouba
+  @salud=100
+  def self.salud
+    @salud
+  end
+  
+  def self.sabe_correr?
+    false
+  end
+  
+  def self.gritar
+    @gritar= "¡agrrrg!"
+  end
+  
+  def self.recibir_danio!(cant_danio)
+    @salud -= [cant_danio*2, 0].max
+    if salud <= 0
+      @salud = 0
+    end
+  end
+end
+
+
+Ejercicio 2: Atacando un zombi
+Te presentamos a la primera de las sobrevivientes de la invasión, Juliana . Por ahora su comportamiento es simple: 
+sabe atacar! a un zombi con cierta cantidad de puntos de daño. Y al hacerlo, el zombi recibe daño.
+Además cuenta con un nivel de energia, que inicia en 1000, pero todavía no haremos nada con él. Definí un método getter para este atributo.
+Veamos si se entiende: definí el objeto Juliana que pueda atacar! a un zombi haciéndolo recibir_danio!, e inicializá su energía en 1000.
+
+Resolución: 
+module Juliana
+  @energia=1000
+  def self.energia
+    @energia
+  end
+  
+  def self.atacar!(zombie, cant_danio)
+    @atacar = zombie.recibir_danio!(cant_danio) 
+  end
+end
+
+Ejercicio 3: Otro zombi caminante
+Definí otro objeto, Kiki, que se comporte de la misma forma que Bouba. ¡Te dejamos a Bouba para que lo uses como inspiración!
+
+Resolución: 
+module Bouba 
+  @salud=100
+  def self.salud
+    @salud
+  end
+  
+  def self.sabe_correr?
+    false
+  end
+  
+  def self.gritar
+    @gritar= "¡agrrrg!"
+  end
+  
+  def self.recibir_danio!(cant_danio)
+    @salud -= [cant_danio*2, 0].max
+    if salud <= 0
+      @salud = 0
+    end
+  end
+end
+
+module Kiki
+  @salud = 100
+
+  def self.salud
+    @salud
+  end
+
+  def self.gritar
+    @gritar = "¡agrrrg!"
+  end
+
+  def self.sabe_correr?
+    false
+  end
+
+  def self.esta_vivo?
+    @salud > 0
+  end
+  
+  def self.recibir_danio!(cant_danio)
+    @salud -= [cant_danio*2, 0].max
+    if salud <= 0
+      @salud = 0
+    end
+  end
+end
+
+
+Ejercicio 4: ¡¿Vivos?!
+Definí el método sin_vida? que nos dice si la salud de Bouba o Kiki es cero.
+
+Resolución: 
+module Bouba
+  @salud = 100
+
+  def self.salud
+    @salud
+  end
+
+  def self.gritar
+    @gritar = "¡agrrrg!"
+  end
+
+  def self.sabe_correr?
+    false
+  end
+
+  def self.esta_vivo?
+    @salud > 0
+  end
+  
+  def self.recibir_danio!(cant_danio)
+    @salud -= [cant_danio*2, 0].max
+    if salud <= 0
+      @salud = 0
+    end
+  end
+  
+  def self.sin_vida?
+    !self.esta_vivo?
+  end
+end
+
+module Kiki
+  @salud = 100
+
+  def self.salud
+    @salud
+  end
+
+  def self.gritar
+    @gritar = "¡agrrrg!"
+  end
+
+  def self.sabe_correr?
+    false
+  end
+
+  def self.esta_vivo?
+    @salud > 0
+  end
+  
+  def self.recibir_danio!(cant_danio)
+    @salud -= [cant_danio*2, 0].max
+    if salud <= 0
+      @salud = 0
+    end
+  end
+    def self.sin_vida?
+    !self.esta_vivo?
+  end
+end
+
+Ejercicio 5: Clases
+Veamos si se entiende: como Bouba y Kiki se comportan exactamente de la misma forma, generalizalos definiendo una 
+clase Zombi que entienda los mismos cinco mensajes que ellos. 
+Podés ver las definiciones de ambos zombis en la solapa Biblioteca.
+
+Resolución: 
+class Zombi
+  def initialize
+    @salud = 100
+  end
+
+  def salud
+    @salud
+  end
+
+  def gritar
+    @gritar = "¡agrrrg!"
+  end
+
+  def sabe_correr?
+    false
+  end
+
+  def esta_vivo?
+    @salud > 0
+  end
+  
+  def recibir_danio!(cant_danio)
+    @salud -= [cant_danio*2, 0].max
+    if salud <= 0
+      @salud = 0
+    end
+  end
+  
+  def sin_vida?
+    !self.esta_vivo?
+  end
+end 
+
+
+Ejercicio 6: Instancias
+Celular, al igual que todas las clases, entiende el mensaje new, que crea una nueva instancia de esa clase.
+¡Ahora te toca a vos! Definí bouba y kiki como instancias de la clase Zombi.
+
+Resolución: 
+bouba = Zombi.new
+kiki = Zombi.new
+
+
+Ejercicio 7: Al menos tenemos salud
+class Zombi
+  def initialize
+    @salud = 100
+  end
+
+  def salud
+    @salud
+  end
+
+  #...y otros métodos
+
+end
+¡Averigualo! Hacé que Juliana ataque a cada zombi con distintos puntos de daño y luego consultá la salud de ambos.
+
+Resolución:  
+> Juliana.atacar!(bouba, 10)
+=> 80
+> Juliana.atacar!(kiki, 15)
+=> 70
+> kiki.salud
+=> 70
+> bouba.salud
+=> 80
+
+
+Ejercicio 8: Inicializando instancias
+El mensaje initialize nos permite especificar cómo queremos que se inicialice la instancia de una clase. ¡Es así de fácil!
+¡anastasia llega para combatir los zombis! Definí una clase Sobreviviente que sepa atacar! zombis e inicialice la energia en 1000. 
+En la solapa Biblioteca podés ver el código de la Juliana original.
+Luego, definí juliana y anastasia como instancias de la nueva clase Sobreviviente.
+
+Resolución:
+class Sobreviviente
+  def initialize
+    @energia = 1000
+  end
+  
+  def energia
+     @energia
+  end
+
+  def atacar!(zombie, cant_danio)
+    @atacar = zombie.recibir_danio!(cant_danio) 
+  end
+end
+
+juliana = Sobreviviente.new
+anastasia = Sobreviviente.new 
+
+
+Ejercicio 9: Ahora sí: invasión
+Veamos si se entiende: Agregale veinte nuevos zombis a la colección caminantes. ¡No olvides que los números entienden el mensaje times!
+Luego, agregale un método ataque_masivo! a Sobreviviente, que reciba una colección de zombis y los ataque a todos con 15 puntos de daño.
+
+Resolución: 
+class Sobreviviente
+  def initialize
+    @energia = 1000
+  end
+  
+  def energia
+     @energia
+  end
+
+  def atacar!(zombie, cant_danio)
+    @atacar = zombie.recibir_danio!(cant_danio) 
+  end
+  
+  def ataque_masivo!(zombies)
+    zombies.each { |zombie| atacar!(zombie, 15)}
+  end  
+end
+
+juliana = Sobreviviente.new
+anastasia = Sobreviviente.new 
+caminantes = []
+20.times {caminantes.push Zombi.new}
+
+
+Ejercicio 10: Al menos tenemos (menos) salud
+¡Ahora te toca a vos! Modificá la clase Zombi para que initialize pueda recibir la salud inicial del mismo.
+
+ Resolución: 
+ class Zombi
+  def initialize(salud)
+    @salud = salud
+  end
+
+  def salud
+    @salud
+  end
+
+  def gritar
+    @gritar = "¡agrrrg!"
+  end
+
+  def sabe_correr?
+    false
+  end
+
+  def esta_vivo?
+    @salud > 0
+  end
+  
+  def recibir_danio!(cant_danio)
+    @salud -= [cant_danio*2, 0].max
+    if salud <= 0
+      @salud = 0
+    end
+  end
+  
+  def sin_vida?
+    !self.esta_vivo?
+  end
+end 
+
+
+
+Ejercicio 11: Súper zombi
+Un SuperZombi sabe_correr? , y en lugar del doble, recibe el triple de puntos de daño. Sin embargo, 
+puede gritar y decirnos su salud de la misma forma que un Zombi común, y queda sin_vida? en los mismos casos: cuando su salud es 0.
+Pero eso no es todo, porque también pueden regenerarse!. Al hacerlo, su salud vuelve a 100.
+¡A correr! Definí la clase SuperZombi aplicando las modificaciones necesarias a la clase Zombi.
+
+Resolución: 
+class SuperZombi
+  def initialize(salud_inicial)
+    @salud = salud_inicial
+  end
+
+  def salud
+    @salud
+  end
+
+  def gritar
+    @gritar = "¡agrrrg!"
+  end
+
+  def sabe_correr?
+    true
+  end
+
+  def esta_vivo?
+    @salud > 0
+  end
+  
+  def regenerarse!
+    @salud = 100
+  end
+
+  def recibir_danio!(cant_danio)
+    @salud -= [cant_danio*3, 0].max
+    if salud <= 0
+      @salud = 0
+    end
+  end
+
+  def sin_vida?
+    !self.esta_vivo?
+  end
+end 
+
+
+Ejercicio 12: Ejercitando
+Pero también pueden beber! bebidas energéticas para recuperar las fuerzas: cada vez que beben, su energia aumenta un 25%.
+Modificá la clase Sobreviviente para que pueda disminuirse y recuperarse su energia.
+
+Resolución: 
+class Sobreviviente
+  def initialize
+    @energia = 1000
+  end
+
+  def energia
+    @energia
+  end
+  
+  def atacar!(zombie, danio)
+    zombie.recibir_danio!(danio)
+  end
+  
+  def ataque_masivo!(zombis)
+    zombis.each { |zombi| atacar!(zombi, 15) }
+    @energia -= @energia * 0.50
+  end
+  
+  def beber!
+    @energia += @energia * 0.25
+  end
+end
+
+
+Ejercicio 13: Aliados
+¡Nadie lo esperaba, pero igualmente llegó! Un Aliado se comporta parecido a una Sobreviviente, 
+pero su ataque_masivo! es más violento: brinda 20 puntos de daño en lugar de 15.
+Por otro lado, su energia inicial es de solamente 500 puntos, y disminuye un 5% al atacar!. Y además, beber! les provee menos energía: solo aumenta un 10%.
+Definí la clase Aliado. Podés ver a Sobreviviente en la solapa Biblioteca.
+
+Resolución:
+class Aliado
+  def initialize
+    @energia = 500
+  end
+
+  def energia
+    @energia
+  end
+
+  def atacar!(zombie, danio)
+    zombie.recibir_danio!(danio)
+    @energia -= @energia * 0.05
+  end
+
+  def ataque_masivo!(zombis)
+    zombis.each { |zombi| atacar!(zombi, 20) }
+    @energia -= @energia * 0.50
+
+  end
+
+  def beber!
+    @energia += @energia * 0.1
+  end
+end
