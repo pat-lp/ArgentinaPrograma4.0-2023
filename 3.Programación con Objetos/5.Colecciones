@@ -1,1 +1,271 @@
+Ejercicio 1: Entrando en Calor
+Para empezar, tendremos tres videojuegos, de los cuales sabemos lo siguiente:
 
+CarlosDuty: es violento. Su dificultad se calcula como 30 - @cantidad_logros * 0.5. Y si se lo juega 
+por más de 2 horas seguidas, se le suma un logro a su cantidad. Inicialmente, el juego no tiene logros.
+TimbaElLeon: no es violento. Su dificultad inicial es 25 y crece un punto por cada hora que se juegue.
+Metroide: es violento sólo si @nivel_espacial es mayor a 5. Este nivel arranca en 3 pero se incrementa en 1 cada 
+vez que se lo juega, sin importar por cuánto tiempo. Además, su dificultad siempre es 100.
+Definí estos tres objetos de forma que entiendan los mensajes dificultad, violento? y jugar!(un_tiempo).
+
+Resolución: 
+module CarlosDuty
+  @cantidad_logros=0
+  def self.violento? 
+    true
+  end
+
+  def self.dificultad
+    30 - @cantidad_logros * 0.5
+  end
+
+  def self.jugar!(un_tiempo)
+    if un_tiempo > 2
+      @cantidad_logros+=1
+    else
+      false
+    end
+  end 
+end
+
+module TimbaElLeon
+ @dificultad=25
+ def self.jugar!(un_tiempo)
+    @dificultad =25+un_tiempo
+ end
+  
+ def self.violento?
+   false
+ end
+  
+ def self.dificultad
+   @dificultad
+ end
+end
+
+module Metroide
+  @nivel_espacial = 3
+
+  def self.dificultad
+    100
+  end
+  
+  def self.violento?
+    @nivel_espacial>5
+  end
+  
+  def self.jugar!(un_tiempo)
+     @nivel_espacial += 1
+  end
+end
+
+
+Ejercicio 2: Creando una lista
+definir un objeto, la Juegoteca, que contenga otros objetos: nuestros videojuegos. Para ello vamos a usar una lista de objetos: 
+es un tipo de colección en la cual los elementos pueden repetirse. Es decir, el mismo objeto puede aparecer más de una vez.
+Veamos si se entiende: definí un objeto Juegoteca que tenga un atributo juegos con su correspondiente getter.
+La Juegoteca tiene que tener en primer lugar el juego CarlosDuty, luego TimbaElLeon y por último Metroide.
+
+Resolución: 
+module Juegoteca
+  @juegos = [CarlosDuty, TimbaElLeon, Metroide]
+  
+  def self.juegos
+    @juegos
+  end
+end
+
+Ejercicio 3: Algunos mensajes básicos
+numeros_de_la_suerte = [6, 7, 42]
+¡Probá enviarle los mensajes push, delete, include? y size a la colección numeros_de_la_suerte!
+
+Resolución: 
+> numeros_de_la_suerte.size
+=> 3
+> numeros_de_la_suerte.push
+=> [6, 42, 9]
+numeros_de_la_suerte.delete 6
+
+
+Ejercicio 4: Set o no set
+Otro tipo muy común de colecciones son los sets (conjuntos), los cuales tienen algunas diferencias con las listas:
+no admiten elementos repetidos;
+sus elementos no tienen un orden determinado.
+
+Resolución: 
+Continuar
+
+Ejercicio 5: Mejorando la Juegoteca
+Nuestra Juegoteca maneja puntos. Agregá el código necesario para que entienda los siguientes mensajes:
+puntos: nos dice cuantos puntos tiene la Juegoteca. Inicialmente son 0.
+adquirir_juego!(un_juego): agrega el juego a la Juegoteca, y le suma 150 puntos.
+borrar_juego!(un_juego): quita un juego de la Juegoteca, pero no resta puntos.
+completa?: se cumple si la Juegoteca tiene más de 1000 puntos y más de 5 juegos.
+juego_recomendable?(un_juego): es verdadero para un_juego si no está en la Juegoteca y es violento?.
+
+Resolución: 
+module Juegoteca
+  @juegos = [CarlosDuty, TimbaElLeon, Metroide]
+  @puntos = 0
+ 
+  def self.juegos
+    @juegos
+  end
+  
+  def self.puntos
+    @puntos
+  end
+  
+  def self.adquirir_juego!(un_juego)
+    @juegos.push un_juego
+    @puntos += 150
+  end
+  
+  def self.borrar_juego!(un_juego)
+    @juegos.delete un_juego
+  end
+  
+  def self.completa?
+    @puntos > 1000 && @juegos.size > 5
+   end
+    
+  def self.juego_recomendable?(un_juego)
+    !(@juegos.include?(un_juego)) && un_juego.violento?
+end
+end
+
+
+Ejercicio 6: ¿Bloques? ¿Eso se come?
+¿Cuánto vale un_numero luego de las primeras dos líneas? Tené en cuenta que la secuencia 
+de envío de mensajes en el bloque del primer ejemplo está sin ejecutar. En cambio, en el ejmplo de otro_numero estamos enviando el mensaje call. 
+Por lo tanto:
+un_numero vale 7, porque el bloque incrementador no está aplicado. Por tanto, no se le suma 1.
+otro_numero vale 10, porque el bloque duplicador se aplica mediante el envío de mensaje call, 
+que hace que se ejecute el código dentro del bloque. Por tanto, se duplica su valor.
+
+
+Ejercicio 7: Bloques con parámetros
+Asignale a la variable jugar_a_timba un bloque que reciba un único parámetro. 
+El bloque recibe una cantidad de minutos y debe hacer que se juegue a TimbaElLeon durante ese tiempo, pero recordá que jugar! espera una cantidad de horas.
+
+Resolución: 
+jugar_a_timba = proc{|cant_minutos| cant_minutos = TimbaElLeon.jugar! cant_minutos/60}
+
+
+Ejercicio 8: Filtrando quienes cumplen
+¡Ahora te toca a vos! Definí el método juegos_violentos que retorna los juegos de la Juegoteca que cumplan violento?.
+
+Resolución: 
+module Juegoteca
+  @juegos = [CarlosDuty, TimbaElLeon, Metroide]
+  
+  def self.juegos
+    @juegos
+  end
+  
+  def self.juegos_violentos
+    @juegos.select{|juegos| juegos.violento?}
+  end
+end
+
+
+Ejercicio 9: El que busca encuentra
+Veamos si se entiende: hacé que la Juegoteca entienda juego_mas_dificil_que(una_dificultad), 
+que retorna algún juego en la Juegoteca con más dificultad que la que se pasa como argumento.
+
+Resolución: 
+module Juegoteca
+  @juegos = [CarlosDuty, TimbaElLeon, Metroide]
+  
+  def self.juegos
+    @juegos
+  end
+  
+  def self.juego_mas_dificil_que(una_dificultad)
+   juego_mas_dificil_que=@juegos.find{|juegos| juegos.dificultad > una_dificultad}
+  end
+end
+
+
+Ejercicio 10: ¿Alguno cumple? ¿Todos cumplen?
+Definí los siguientes métodos en nuestra Juegoteca:
+mucha_violencia?: se cumple si todos los juegos que posee son violentos.
+muy_dificil?: nos dice si alguno de los juegos tiene más de 25 puntos de dificultad.
+
+Resolución:
+module Juegoteca
+  @juegos = [CarlosDuty, TimbaElLeon, Metroide]
+  
+  def self.juegos
+    @juegos
+  end
+   
+  def self.mucha_violencia?
+    @juegos.all?{|un_juego| un_juego.violento?}
+  end
+  
+  def self.muy_dificil?
+    @juegos.any?{|un_juego| un_juego.dificultad > 25}
+  end 
+end
+
+
+Ejercicio 11: El viejo y querido map
+Agregá a la Juegoteca un método llamado dificultad_violenta que retorne una colección con la dificultad de sus juegos_violentos.
+
+Resolución: 
+module Juegoteca
+  @juegos = [CarlosDuty, TimbaElLeon, Metroide]
+  
+  def self.juegos
+    @juegos
+  end
+  
+  def self.juegos_violentos
+    @juegos.select{|juegos| juegos.violento?}
+  end
+  
+  def self.dificultad_violenta
+    juegos_violentos.map{|juego| juego.dificultad}
+  end
+end
+
+
+Ejercicio 12: ¿Cuántos cumplen? ¿Cuánto suman?
+Veamos si se entiende: agregá a la Juegoteca el método promedio_de_violencia, c
+uyo valor sea la sumatoria de dificultad de los juegos violentos dividida por la cantidad de juegos violentos de la Juegoteca.
+
+Resolución: 
+module Juegoteca
+  @juegos = [CarlosDuty, TimbaElLeon, Metroide]
+  
+  def self.juegos
+    @juegos
+  end
+  
+  def self.juegos_violentos
+    @juegos.select{|juegos| juegos.violento?}
+  end
+  
+  def self.promedio_de_violencia
+    juegos_violentos.sum{|juego| juego.dificultad}/juegos_violentos.count{|juego| juego.dificultad}
+  end
+end
+
+
+Ejercicio 13: Jugando a todo
+Definí el método jugar_a_todo! en la Juegoteca, que haga jugar a cada uno de los juegos durante 5 horas. 
+Recordá que los juegos entienden jugar!(un_tiempo).
+
+Resolución: 
+module Juegoteca
+  @juegos = [CarlosDuty, TimbaElLeon, Metroide]
+  def self.juegos
+    @juegos
+  end
+
+  def self.jugar_a_todo!
+    juegos.each { |juego| juego.jugar!(5)}
+  end
+end
+end
